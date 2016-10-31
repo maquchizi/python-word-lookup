@@ -58,7 +58,7 @@ def main(argv):
 
 
 def usage():
-    print 'Usage: python dictionary.py -w word-to-search -l number-of-definitions-to-get'
+    print 'Usage: ./dictionary.py -w word-to-search -l number-of-definitions-to-get'
 
 
 if __name__ == "__main__":
