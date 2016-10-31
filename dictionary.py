@@ -37,10 +37,13 @@ def main(argv):
     client = swagger.ApiClient(apiKey, apiUrl)
     wordApi = WordApi.WordApi(client)
     definitions = wordApi.getDefinitions(word, limit=definition_limit)
-    print '\033[1m' + word + '\033[0m'
-    print definitions[0].partOfSpeech
-    for definition in definitions:
-        print definition.text
+    if definitions:
+        print '\033[1m' + word + '\033[0m'
+        print definitions[0].partOfSpeech
+        for definition in definitions:
+            print definition.text
+    else:
+        print 'Word not found. Sorry.'
 
 
 def usage():
