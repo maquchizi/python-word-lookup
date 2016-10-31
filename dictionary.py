@@ -6,7 +6,7 @@ import getopt
 def main(argv):
     '''
         Script to get the definition of a word from wordnik.com
-        Sign up and get an API key from http://developer.wordnik.com/ before use
+        Sign up and get a FREE API key from http://developer.wordnik.com/ before use
 
         Options:
             -w or --word - The word you wish to search for
@@ -37,7 +37,7 @@ def main(argv):
     client = swagger.ApiClient(apiKey, apiUrl)
     wordApi = WordApi.WordApi(client)
     definitions = wordApi.getDefinitions(word, limit=definition_limit)
-    print word
+    print '\033[1m' + word + '\033[0m'
     print definitions[0].partOfSpeech
     for definition in definitions:
         print definition.text
