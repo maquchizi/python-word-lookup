@@ -39,7 +39,8 @@ def main(argv):
     definitions = wordApi.getDefinitions(word, limit=definition_limit)
     if definitions:
         print '\033[1m' + word + '\033[0m'
-        print definitions[0].partOfSpeech
+        if definitions[0].partOfSpeech:
+            print definitions[0].partOfSpeech
         for definition in definitions:
             print definition.text
     else:
