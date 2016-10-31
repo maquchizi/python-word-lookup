@@ -36,6 +36,10 @@ def main(argv):
         elif opt in ("-l", "--limit"):
             definition_limit = arg
 
+    if word == '':
+        usage()
+        sys.exit(2)
+
     apiUrl = 'http://api.wordnik.com/v4'
     apiKey = '8d6e647dd008063e7d00d0823cc07145aab1c078e0f99e4da'  # Replace with your own API key
     client = swagger.ApiClient(apiKey, apiUrl)
