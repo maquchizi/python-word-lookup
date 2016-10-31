@@ -1,4 +1,4 @@
-# Python Dictionary
+# Python Word Lookup
 
 Script to get the definition of a word from wordnik.com
 
