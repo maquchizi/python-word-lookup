@@ -15,6 +15,6 @@ Sign up and get a FREE API key from http://developer.wordnik.com/ before use
 >-l or --limit - The number of defitions you would like to get back
 
 ##Usage:
->python dictionary.py -w prime -l 3
+>./dictionary.py -w prime -l 3
 
->python dictionary.py --word prime --limit 3
+>./dictionary.py --word prime --limit 3

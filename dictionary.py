@@ -1,3 +1,5 @@
+#!/usr/bin/python
+
 from wordnik import *
 import sys
 import getopt
@@ -17,8 +19,8 @@ def main(argv):
             -l or --limit - The number of defitions you would like to get back
 
         Usage examples:
-            python dictionary.py -w prime -l 3
-            python dictionary.py --word prime --limit 3
+            ./dictionary.py -w prime -l 3
+            ./dictionary.py --word prime --limit 3
     '''
     definition_limit = 1
     word = ''
