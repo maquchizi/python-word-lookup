@@ -5,7 +5,7 @@ Script to get the definition of a word from wordnik.com
 Sign up and get a FREE API key from http://developer.wordnik.com/ before use
 
 ##Requirements:
-Requests HTTP library - Install using `pip install requests`
+Requests HTTP library v2.11.1 or later - Install using `pip install requests==2.11.1`
 
 Requests security updates (Python 2 only) - Install using `pip install requests[security]`
 

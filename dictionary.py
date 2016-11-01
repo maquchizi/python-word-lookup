@@ -11,7 +11,7 @@ def main(argv):
         Sign up and get a FREE API key from http://developer.wordnik.com/ before use
 
         Requirements:
-            Requests HTTP library - Install using pip install requests
+            Requests HTTP library v2.11.1 or later - Install using pip install requests==2.11.1
             Requests security updates (Python 2 only) - Install using pip install requests[security]
             Wordnik API key - Sign up for one for free at http://developer.wordnik.com/
 
@@ -48,21 +48,26 @@ def main(argv):
     headers = {'api_key': api_key}
     params = {'limit': definition_limit}
 
-    resp = requests.get(api_url + word + '/definitions', params, headers=headers)
+    try:
+        resp = requests.get(api_url + word + '/definitions', params, headers=headers)
+    except TypeError:
+        print ('\t\033[31m Error: \033[0m: Make sure you\'re using requests v2.11.1 or later \n\t pip install requests==2.11.1')
+        sys.exit(2)
+
     definitions = resp.json()
 
     if definitions:
-        print '\033[1m' + word + '\033[0m'
+        print ('\033[1m' + word + '\033[0m')
         if definitions:
-            print definitions[0]['partOfSpeech']
+            print (definitions[0]['partOfSpeech'])
         for definition in definitions:
-            print definition['text']
+            print (definition['text'])
     else:
-        print 'Word not found. Sorry.'
+        print ('Word not found. Sorry.')
 
 
 def usage():
-    print 'Usage: ./dictionary.py -w word-to-search -l number-of-definitions-to-get'
+    print ('Usage: ./dictionary.py -w word-to-search -l number-of-definitions-to-get')
 
 
 if __name__ == "__main__":
