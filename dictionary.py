@@ -24,7 +24,8 @@ def main(argv):
             ./dictionary.py --word prime --limit 3
     '''
     api_url = 'http://api.wordnik.com/v4/word.json/'
-    api_key = '8d6e647dd008063e7d00d0823cc07145aab1c078e0f99e4da'  # Replace with your own API key
+    # Replace with your own API key
+    api_key = '8d6e647dd008063e7d00d0823cc07145aab1c078e0f99e4da'
     definition_limit = 1
     word = ''
 
