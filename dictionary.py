@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-from wordnik import *
+import requests
 import sys
 import getopt
 
@@ -11,7 +11,8 @@ def main(argv):
         Sign up and get a FREE API key from http://developer.wordnik.com/ before use
 
         Requirements:
-            The official Python client library for the Wordnik API - Install using pip install wordnik
+            Requests HTTP library - Install using pip install requests
+            Requests security updates (Python 2 only) - Install using pip install requests[security]
             Wordnik API key - Sign up for one for free at http://developer.wordnik.com/
 
         Options:
@@ -22,6 +23,8 @@ def main(argv):
             ./dictionary.py -w prime -l 3
             ./dictionary.py --word prime --limit 3
     '''
+    api_url = 'http://api.wordnik.com/v4/word.json/'
+    api_key = '8d6e647dd008063e7d00d0823cc07145aab1c078e0f99e4da'  # Replace with your own API key
     definition_limit = 1
     word = ''
 
@@ -42,17 +45,18 @@ def main(argv):
         usage()
         sys.exit(2)
 
-    apiUrl = 'http://api.wordnik.com/v4'
-    apiKey = '8d6e647dd008063e7d00d0823cc07145aab1c078e0f99e4da'  # Replace with your own API key
-    client = swagger.ApiClient(apiKey, apiUrl)
-    wordApi = WordApi.WordApi(client)
-    definitions = wordApi.getDefinitions(word, limit=definition_limit)
+    headers = {'api_key': api_key}
+    params = {'limit': definition_limit}
+
+    resp = requests.get(api_url + word + '/definitions', params, headers=headers)
+    definitions = resp.json()
+
     if definitions:
         print '\033[1m' + word + '\033[0m'
-        if definitions[0].partOfSpeech:
-            print definitions[0].partOfSpeech
+        if definitions:
+            print definitions[0]['partOfSpeech']
         for definition in definitions:
-            print definition.text
+            print definition['text']
     else:
         print 'Word not found. Sorry.'
 
