@@ -57,6 +57,7 @@ def main(argv):
         sys.exit(2)
 
     definitions = def_resp.json()
+    # Try getting definitions again with the lower case version of the word
     if not definitions:
         def_resp = requests.get(api_url + word.lower() + '/definitions', params, headers=headers)
         pro_resp = requests.get(api_url + word.lower() + '/pronunciations', params, headers=headers)
@@ -64,14 +65,17 @@ def main(argv):
     pronunciations = pro_resp.json()
 
     if definitions:
+        # Print the word in bold
         print ('\033[1m' + word + '\033[0m')
+        # Print the pronuciation is available
         if pronunciations:
             print (pronunciations[0]['raw'])
-        try:
-            definitions[0]['partOfSpeech']
+
+        # Print the part of speech if available
+        if 'partOfSpeech' in definitions[0]:
             print (definitions[0]['partOfSpeech'])
-        except KeyError:
-            pass
+
+        # Finally, print definitions
         for definition in definitions:
             print (definition['text'])
     else:
