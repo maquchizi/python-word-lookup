@@ -49,19 +49,31 @@ def main(argv):
     params = {'limit': definition_limit}
 
     try:
-        resp = requests.get(api_url + word + '/definitions', params, headers=headers)
+        def_resp = requests.get(api_url + word + '/definitions', params, headers=headers)
+        pro_resp = requests.get(api_url + word + '/pronunciations', params, headers=headers)
     except TypeError:
         print ('\t\033[31m Error: \033[0m: Make sure you\'re using requests v2.11.1 or later \n\t pip install requests==2.11.1')
         sys.exit(2)
 
-    definitions = resp.json()
+    definitions = def_resp.json()
+    if not definitions:
+        def_resp = requests.get(api_url + word.lower() + '/definitions', params, headers=headers)
+        pro_resp = requests.get(api_url + word.lower() + '/pronunciations', params, headers=headers)
+    definitions = def_resp.json()
+    pronunciations = pro_resp.json()
 
     if definitions:
         print ('\033[1m' + word + '\033[0m')
+        if pronunciations:
+            print (pronunciations[0]['raw'])
         if definitions:
-            print (definitions[0]['partOfSpeech'])
-        for definition in definitions:
-            print (definition['text'])
+            try:
+                definitions[0]['partOfSpeech']
+                print (definitions[0]['partOfSpeech'])
+            except KeyError:
+                pass
+            for definition in definitions:
+                print (definition['text'])
     else:
         print ('Word not found. Sorry.')
 
