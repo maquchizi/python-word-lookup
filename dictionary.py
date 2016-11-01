@@ -67,14 +67,13 @@ def main(argv):
         print ('\033[1m' + word + '\033[0m')
         if pronunciations:
             print (pronunciations[0]['raw'])
-        if definitions:
-            try:
-                definitions[0]['partOfSpeech']
-                print (definitions[0]['partOfSpeech'])
-            except KeyError:
-                pass
-            for definition in definitions:
-                print (definition['text'])
+        try:
+            definitions[0]['partOfSpeech']
+            print (definitions[0]['partOfSpeech'])
+        except KeyError:
+            pass
+        for definition in definitions:
+            print (definition['text'])
     else:
         print ('Word not found. Sorry.')
 
